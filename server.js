@@ -43,13 +43,15 @@ app.get('/envelopes/all', (req, res) => {
 
 //get method for retreiving a specific envelope and seeing the contents
 app.get('/envelopes/:id', (req, res) => {
-    if (req.params.id > envelopes.length || req.params.id < 1) {
+    const envelopeId = Number(req.params.id)
+    const envelopeIndex = envelopes.findIndex(envelope => envelope.id === envelopeId)
+
+    if (envelopeIndex === -1) {
         res.status(400).send('The given id was not an id of an envelope.')
     }
-    for (let i = 1; i < envelopes.length; i++) {
-        if (req.params.id === envelopes[i].id) {
-            res.send(envelopes[i])
-        }
+    else {
+        req.envelopeIndex = envelopeIndex
+        res.send(envelopes[req.envelopeIndex])
     }
 })
 //starts the server listening on the desired port and states the port being listened to
