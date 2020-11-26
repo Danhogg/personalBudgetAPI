@@ -35,6 +35,11 @@ app.post('/envolopes/', validateEnvolope, (req, res) => {
     res.status(201).send(newEnvolope)
 })
 
+//get method for all envolopes that have been created
+app.get('/envolopes/all', (req, res) => {
+    res.send(envolopes)
+})
+
 //starts the server listening on the desired port and states the port being listened to
 app.listen(PORT, function() {
     console.log(`Listening on port: ${PORT}`)
