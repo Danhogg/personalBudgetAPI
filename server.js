@@ -44,7 +44,7 @@ app.get('/', (req, res) => {
 })
 
 //post method for adding an envelope to our envelopes array
-app.post('/envelopes/', validateEnvelope, (req, res) => {
+app.post('/envelopes', validateEnvelope, (req, res) => {
     const newEnvelope = req.body
     newEnvelope.id = nextId++
     envelopes.push(newEnvelope)
