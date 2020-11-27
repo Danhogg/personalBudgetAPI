@@ -9,20 +9,20 @@ to be done locally. The port used in this project is 3000 so all requests will b
 - DELETE
 
 ### GET
-- [x] '/' returns a string telling the user about what can be done in this project.
-- [x] '/envelopesall' returns all envelopes that have been posted into the envelopes array.
-- [x] '/envelopes/:id' returns the envelope with the specified id if the id relates to an envelope object and returns a 400 error otherwise.
+[x] '/' returns a string telling the user about what can be done in this project.
+[x] '/envelopesall' returns all envelopes that have been posted into the envelopes array.
+[x] '/envelopes/:id' returns the envelope with the specified id if the id relates to an envelope object and returns a 400 error otherwise.
 
 ### POST
-- [x] '/envelopes' will validate a new envelope that is submitted checking the title and budget parameters ensuring the title is a string and budget is a number
+[x] '/envelopes' will validate a new envelope that is submitted checking the title and budget parameters ensuring the title is a string and budget is a number
 then will add any valid envelope to the envelopes array with an id.
-- [] '/envelopes/transfer/:from/:to' transfers a specific amount from one envelope to another if you want to increase the budget from one envelope by taking it from another 
+[ ] '/envelopes/transfer/:from/:to' transfers a specific amount from one envelope to another if you want to increase the budget from one envelope by taking it from another 
 
 ### PUT
-- [x] '/envelopes/:id' will update the requested envelope if the user uses an envelope of the valid format 
+[x] '/envelopes/:id' will update the requested envelope if the user uses an envelope of the valid format 
 
 ### DELETE
-- [x] '/envelopes/:id' deletes the specified envelope from the array
+[x] '/envelopes/:id' deletes the specified envelope from the array
 
 #### Extra info
 Envelopes passed into the POST for adding to the envelopes array should be JSON files of the form {"title": "string", "budget": number} or vice versa. 
