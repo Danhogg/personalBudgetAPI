@@ -19,7 +19,7 @@ app.use(bodyParser.json())
 // validates that the given envelope is of a valid format
 function validateEnvelope(req, res, next) {
     const newEnvelope = req.body
-    if (typeof newEnvelope.title !== "string" || typeof newEnvelope.budget !== "number") {
+    if (typeof newEnvelope.title !== "string" || typeof newEnvelope.budget !== "number" || !newEnvelope.title || !newEnvelope.budget) {
         return res.status(400).send('Invalid envelope')
     }
     next()
