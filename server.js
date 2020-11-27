@@ -25,6 +25,19 @@ function validateEnvelope(req, res, next) {
     next()
 }
 
+//used on the envelopes/:id route to get a specific envelope
+app.use('/envelopes/:id', (req, res, next) => {
+    const envelopeId = Number(req.params.id)
+    const envelopeIndex = envelopes.findIndex(envelope => envelope.id === envelopeId)
+
+    if (envelopeIndex === -1) {
+        res.status(400).send('The given id was not an id of an envelope.')
+    }
+    
+    req.envelopeIndex = envelopeIndex
+    next()
+})
+
 //This sends a message to the user about what this app can do and what it does
 app.get('/', (req, res) => {
     res.send('Hello, World! This API allows you to create a personal budget and use the envelope budgeting method.')
@@ -40,29 +53,24 @@ app.post('/envelopes/', validateEnvelope, (req, res) => {
 
 
 //get method for all envelopes that have been created
-app.get('/envelopes/all', (req, res) => {
+app.get('/envelopesall', (req, res) => {
     res.send(envelopes)
 })
 
 
 //get method for retreiving a specific envelope and seeing the contents
 app.get('/envelopes/:id', (req, res) => {
-    const envelopeId = Number(req.params.id)
-    const envelopeIndex = envelopes.findIndex(envelope => envelope.id === envelopeId)
-
-    if (envelopeIndex === -1) {
-        res.status(400).send('The given id was not an id of an envelope.')
-    }
-    else {
-        req.envelopeIndex = envelopeIndex
-        res.send(envelopes[req.envelopeIndex])
-    }
+    res.send(envelopes[req.envelopeIndex])  
 })
 
-app.put('/envelopes/:id', (req, res) => {
+app.put('/envelopes/:id', validateEnvelope, (req, res) => {
     const newEnvelope = req.body
     const envelopeId = Number(req.params.id)
-
+    if( !newEnvelope.id || newEnvelope.id !== envelopeId) {
+        newEnvelope.id = envelopeId
+    }
+    envelopes[req.envelopeIndex] = newEnvelope
+    res.send(newEnvelope)
 })
 
 //starts the server listening on the desired port and states the port being listened to
