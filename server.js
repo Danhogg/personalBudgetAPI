@@ -73,6 +73,12 @@ app.put('/envelopes/:id', validateEnvelope, (req, res) => {
     res.send(newEnvelope)
 })
 
+//method for deleting the specified envelope
+app.delete('/envelopes/:id', (req, res) => {
+    envelopes.splice(req.envelopeIndex, 1)
+    res.status(204).send('Deleted the specified envelope')
+})
+
 //starts the server listening on the desired port and states the port being listened to
 app.listen(PORT, function() {
     console.log(`Listening on port: ${PORT}`)
